@@ -8,11 +8,12 @@ cd /root/software
 #检测依赖包
 for dependent_package in gcc openssl-devel pcre-devel gd-devel unzip
 do
-   rpm -qa | grep $dependent_package  || yum install $dependent_package
+   rpm -qa | grep $dependent_package  || yum -y install $dependent_package
 done
 
 #创建相关运行用户
 read -p "创建Nginx运行用户(default nginx): "  nginx_user
+
 #如果为空, 则创建默认用户名nginx
 [ -z $nginx_user ] && nginx_user="nginx"   
 id $nginx_user >/dev/null 2>&1
@@ -39,6 +40,9 @@ make && make install
 if [ $? -eq 0 ]
 then
     action "Install LuaJIT Success!" /bin/true
+	#添加动态库
+	echo "/usr/local/lib" >/etc/ld.so.conf.d/usr_local_lib.conf
+	ldconfig
 else
     action "Install LuaJIT Failure"  /bin/false
     exit 1
