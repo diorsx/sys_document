@@ -2,7 +2,7 @@
 
 ------
 
-##脚本内容
+## 脚本内容
 
 ```shell
 #!/bin/sh
@@ -139,7 +139,7 @@ esac
 ```
 保存上述脚本为 /etc/init.d/nginx
 
-** 需根据具体部署环境修改上述脚本中的$nginx和$NGINX_CONF_FILE变量 **
+**需根据具体部署环境修改上述脚本中的$nginx和$NGINX_CONF_FILE变量**
 
 ## 添加自启动程序
 
