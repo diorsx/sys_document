@@ -22,9 +22,9 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t o
 ###### 2、参数详细说明
 
 level指定控制套接字的层次.可以取三种值:
-1)SOL_SOCKET:通用套接字选项;
-2)IPPROTO_IP:IP选项;
-3)IPPROTO_TCP:TCP选项;　
+        1) SOL_SOCKET:通用套接字选项;
+        2) IPPROTO_IP:IP选项;
+        3) IPPROTO_TCP:TCP选项;　
 
 optname指定控制的方式(选项的名称)
 
@@ -38,7 +38,7 @@ Nagle算法通过将未确认的数据存入缓冲区直到蓄足一个包一起
 所以TCP_NODELAY可用来将此算法关闭。应用程序编写者只有在确切了解它的效果并确实需要的情况下，才设置TCP_NODELAY选项，因为设置后对网络性能有明显的负面影响。
 TCP_NODELAY是唯一使用IPPROTO_TCP层的选项，其他所有选项都使用SOL_SOCKET层。
 
-** TCP_NODELAY选项禁止Nagle算法 **
+**TCP_NODELAY选项禁止Nagle算法**
 
 ------
 
