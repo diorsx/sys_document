@@ -1,4 +1,4 @@
-#socket选项
+# socket选项
 
 ------
 
@@ -8,6 +8,7 @@ setsockopt与getsockopt.这两个函数不仅能够操作套接字层，而且�
 
 ###### 1、函数原型
 int getsockopt(int sock, int level, int optname, void *optval, socklen_t *optlen);
+
 int setsockopt(int sock, int level, int optname, const void *optval, socklen_t optlen);
 
 > * sock：将要被设置或者获取选项的套接字;
@@ -21,11 +22,11 @@ int setsockopt(int sock, int level, int optname, const void *optval, socklen_t o
 ###### 2、参数详细说明
 
 level指定控制套接字的层次.可以取三种值:
-1)SOL_SOCKET:通用套接字选项.
-2)IPPROTO_IP:IP选项.
-3)IPPROTO_TCP:TCP选项.　
+1)SOL_SOCKET:通用套接字选项;
+2)IPPROTO_IP:IP选项;
+3)IPPROTO_TCP:TCP选项;　
 
-optname指定控制的方式(选项的名称),我们下面详细解释　
+optname指定控制的方式(选项的名称)
 
 optval获得或者是设置套接字选项.根据选项名称的数据类型进行转换　
 
