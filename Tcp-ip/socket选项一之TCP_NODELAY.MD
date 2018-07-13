@@ -29,6 +29,8 @@ optname指定控制的方式(选项的名称),我们下面详细解释　
 
 optval获得或者是设置套接字选项.根据选项名称的数据类型进行转换　
 
+------
+
 ### 二、TCP_NODELAY选项
 
 Nagle算法通过将未确认的数据存入缓冲区直到蓄足一个包一起发送的方法，来减少主机发送的零碎小数据包的数目。但对于某些应用来说，这种算法将降低系统性能。
@@ -36,6 +38,8 @@ Nagle算法通过将未确认的数据存入缓冲区直到蓄足一个包一起
 TCP_NODELAY是唯一使用IPPROTO_TCP层的选项，其他所有选项都使用SOL_SOCKET层。
 
 ** TCP_NODELAY选项禁止Nagle算法 **
+
+------
 
 ### 三、测试及效果验证
 
@@ -72,5 +76,9 @@ time.sleep(5)
 ```
 
 ![抓包截图](https://raw.githubusercontent.com/diorsx/HubPhotos/master/tcp_nodely_01.png)
+
+> * 1、TCP三次握手过程
+> * 2、启用TCP_NODELAY，发包过程
+> * 3、禁用TCP_NODELAY，发包过程
 
 
