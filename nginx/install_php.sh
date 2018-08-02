@@ -15,6 +15,12 @@ for i in *.tar.gz ; do
     tar -xzf "$i"
 done
 
+#检测依赖包
+for dependent_package in libcurl-devle libxml2-devel libjpeg-devel libpng-devel freetype-devel openssl-devel;
+do
+    rpm -qa | grep $dependent_package  || yum -y install $dependent_package
+done
+
 #安装apr依赖包
 apr_path="/usr/local/apr-1.6.3"
 cd apr-1.6.3
@@ -97,7 +103,7 @@ cd ../
 until [ "$module_flags" = "yes" ] || [ "$module_flags" = "no" ] 
 do
 	read -p "是否以APACHE模块形式安装(yes|no):"  module_flags
-   #对用户的输入进行匹配
+	#对用户的输入进行匹配
 	case $module_flags in
        "yes")
             php_installation_options="--with-apxs2=${httpd_path}/bin/apxs"
