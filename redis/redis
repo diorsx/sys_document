@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Startup script for Redis Server
+#
+# chkconfig: 345 85 15
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+
+#redis服务器监听的端口
+REDISPORT=6379
+
+#程序名称
+PROG=redis-server
+
+#服务端所处位置
+EXEC=/usr/local/bin/redis-server
+
+#客户端位置
+CLIEXEC=/usr/local/bin/redis-cli
+
+#redis的PID文件位置
+PIDFILE=/var/run/redis_${REDISPORT}.pid
+
+#redis的配置文件位置
+CONF="/etc/redis/${REDISPORT}.conf"
+
+DESC="Redis server"
+
+case "$1" in
+    "start" )
+        if [ -e $PIDFILE ];then
+            echo "$DESC already running..."
+            exit 1
+        fi
+        echo -n "Starting $DESC..."
+        daemon $EXEC $CONF
+        RETVAL=$?
+        echo
+        #检测daemon命令是否执行成功，若成功则执行touch
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$PROG
+        ;;
+    "stop" )
+        echo -n "Shutting $DESC..."
+        killproc $EXEC -QUIT
+        RETVAL=$?
+        echo
+        #检测killproc命令是否执行成功，若成功则执行rm
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$PROG $PIDFILE
+        ;;
+    "status" )
+        status $EXEC
+        RETVAL=$?
+        echo
+        ;;
+    "restart" )
+        $0 stop
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit RETVAL
