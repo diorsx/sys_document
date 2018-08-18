@@ -16,9 +16,9 @@ Redis是一个基于内存的高性能key-value数据库，由于数据存储在
 当触发BGSAVE命令时，BGSAVE命令会派生出一个子进程，然后由子进程负责创建RDB 文件，服务器进程(父进程)继续处理命令请求。
 
 自动触发RDB机制的场景有：
-1) 使用save相关配置，如‘save m n’表示m秒之内数据集存在n次修改时，自动触发bgsave。
-2）如果从节点执行全量复制操作，主节点自动执行bgsave生成RDB文件并发送给从节点。
-3）执行debug reload命令重新加载Redis时，也会自动触发save操作。
+1) 使用save相关配置，如‘save m n’表示m秒之内数据集存在n次修改时，自动触发bgsave；
+2）如果从节点执行全量复制操作，主节点自动执行bgsave生成RDB文件并发送给从节点；
+3）执行debug reload命令重新加载Redis时，也会自动触发save操作；
 4）默认情况下执行shutdown命令时，如果没有开启AOF持久化功能则自动执行bgsave。
 
 缺点：
