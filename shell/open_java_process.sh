@@ -65,7 +65,7 @@ status_app () {
 
 #start watcher
 start_watcher () {
-    echo "start $watchermodule  ........"
+    echo -e "\033[40;32mstart $watchermodule  ........\033[40;37m"
     echo "1" > reset.flag
     nohup java $WATCHER_JAVA_OPTS $JAVA_CP -jar ../$watchermodule".jar" >>watcher.log 2>&1 &
     if [ $? -eq 0 ]; then
@@ -77,7 +77,7 @@ start_watcher () {
 
 #start app
 start_app () {
-    echo "run $appmodule  ........"
+    echo -e "\033[40;32mrun $appmodule  ........\033[40;37m"
     nohup java $APP_JAVA_OPTS $APP_JAVA_CP -Ddubbo.spring.config=$APP_SPRING_CONTEXT -Ddubbo.container=spring -Duser.home=$DEPLOY_DIR -Dfile.encoding=UTF-8 -jar ../$appmodule".jar" >>/dev/null 2>&1 & 
     if [ $? -eq 0 ]; then
         action "Start appmodule Success" /bin/true
@@ -88,7 +88,7 @@ start_app () {
 
 #stop watcher 
 stop_watcher () {
-    echo -n "stop  $watchermodule  ........"
+    echo -n -e "\033[40;32mstop  $watchermodule  ........\033[40;37m"
     kill -9 $watcher_procid
     if [ $? -eq 0 ]; then
         action "Stop watchermodule Success" /bin/true
@@ -99,7 +99,7 @@ stop_watcher () {
 
 #stop app 
 stop_app () {
-    echo -n "stop  $appmodule  ........"
+    echo -n -e "\033[40;32mstop  $appmodule  ........\033[40;37m"
     kill -9 $app_procid
     if [ $? -eq 0 ]; then
         action "Stop appmodule Success" /bin/true
@@ -139,6 +139,6 @@ case "$1" in
         status_app || start_app		
         ;;
     * )
-        echo $"Usage: $0 {start|stop|run|restart|end}"
+        echo -e "\033[40;32mUsage: $0 {start|stop|check|run|restart|end}\033[40;37m"
         exit 2
 esac
